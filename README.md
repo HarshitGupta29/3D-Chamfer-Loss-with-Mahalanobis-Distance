@@ -19,3 +19,5 @@ where:
   - $\( \mu \)$ is a 1xNx3 tensor representing the mean vectors of $\( N \)$ Gaussians.
   - $\( Y \)$ is a 1xMx3 tensor representing $\( M \)$ points in a point cloud.
   - $\( L \)$ is a 1xNx6 tensor representing the lower triangular matrix of the Cholesky decomposition of each Gaussian's covariance matrix, flattened into a 1x6 vector.
+- The function outputs all the distances between points in $\( Y \)$ and the Gaussians in $\( X \)$.
+- The final Chamfer Loss is computed by applying `torch.mean` to the sum of the minimum distances for both $\( X \)$ and $\( Y \)$.
