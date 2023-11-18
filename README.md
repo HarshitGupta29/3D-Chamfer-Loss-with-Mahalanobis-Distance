@@ -13,3 +13,9 @@ where:
 - $\( \lVert L^{-1}(\mu - y) \rVert_2^2 \)$ denotes the squared L2 norm of the transformed vector difference $\( (\mu - y) \)$, transformed by the inverse of the Cholesky matrix $\( L \)$.
 
 **Note:** Gradient with respect to L is not computed at all in this kernel.
+
+## Implementation Details
+- Input to the function: $\( \mu, Y, L \)$
+  - $\( \mu \)$ is a 1xNx3 tensor representing the mean vectors of $\( N \)$ Gaussians.
+  - $\( Y \)$ is a 1xMx3 tensor representing $\( M \)$ points in a point cloud.
+  - $\( L \)$ is a 1xNx6 tensor representing the lower triangular matrix of the Cholesky decomposition of each Gaussian's covariance matrix, flattened into a 1x6 vector.
