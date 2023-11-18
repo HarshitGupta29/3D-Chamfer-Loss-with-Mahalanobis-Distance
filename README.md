@@ -21,3 +21,6 @@ where:
   - $\( L \)$ is a 1xNx6 tensor representing the lower triangular matrix of the Cholesky decomposition of each Gaussian's covariance matrix, flattened into a 1x6 vector.
 - The function outputs all the distances between points in $\( Y \)$ and the Gaussians in $\( X \)$.
 - The final Chamfer Loss is computed by applying `torch.mean` to the sum of the minimum distances for both $\( X \)$ and $\( Y \)$.
+
+## Installation
+Installation instructions for the Chamfer Loss with Mahalanobis Distance can be found at the original repository: [ThibaultGROUEIX/ChamferDistancePytorch](https://github.com/ThibaultGROUEIX/ChamferDistancePytorch).
