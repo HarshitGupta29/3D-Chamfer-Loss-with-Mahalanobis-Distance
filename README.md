@@ -24,3 +24,14 @@ where:
 
 ## Installation
 Installation instructions for the Chamfer Loss with Mahalanobis Distance can be found at the original repository: [ThibaultGROUEIX/ChamferDistancePytorch](https://github.com/ThibaultGROUEIX/ChamferDistancePytorch).
+
+## Contributing to the Project
+We welcome contributions and improvements to the Chamfer Loss implementation. If you have suggestions for enhancements or have identified issues, please consider the following guidelines for contributing:
+
+- **Pull Requests**: If you wish to contribute code, ensure that your PR is accompanied by a clear description of the problem and a detailed explanation of the proposed solution. Code contributions should be thoroughly tested before submission.
+
+- **Suggestions and Improvements**: We appreciate constructive feedback and innovative ideas. If you have a suggestion, please provide a clear and detailed explanation, ideally with a proposed solution or actionable plan. This helps in understanding the context and potential impact of your suggestion.
+
+- **Feedback and Issues**: While feedback is valuable, we encourage contributors to offer solutions or actionable suggestions alongside their feedback.
+
+Remember, respectful and constructive communication fosters a productive and welcoming environment for all contributors.
