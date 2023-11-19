@@ -39,8 +39,8 @@ __global__ void NmDistanceKernel2(int b,int n,const float * xyz, int m,const flo
 						float e = bufL[k*6+4]; // L[i, j, 2, 1]
 						float f = bufL[k*6+5]; // L[i, j, 2, 2]
 						float v1 = x2 / a;
-						float v2 = (a * y2 - b * x2) / (a * c);
-						float v3 = (a * c * z2 - a * e * y2 + b * e * x2 - c * d * x2) / (a * c * f);
+						float v2 = (y2 - b * v1)/(c);
+						float v3 = (z2 - d * v1 - e * v2)/(f);
 						float dist = v1*v1 + v2*v2 + v3*v3;
 						if (k==0 || dist<best){
 							best=dist;
@@ -85,8 +85,8 @@ __global__ void NmDistanceKernel1(int b,int n,const float * xyz,const float* L, 
 						float y2=buf[k*3+1]-y1;
 						float z2=buf[k*3+2]-z1;
 						float v1 = x2 / a;
-						float v2 = (a * y2 - b * x2) / (a * c);
-						float v3 = (a * c * z2 - a * e * y2 + b * e * x2 - c * d * x2) / (a * c * f);
+						float v2 = (y2 - b * v1)/(c);
+						float v3 = (z2 - d * v1 - e * v2)/(f);
 						float dist = v1*v1 + v2*v2 + v3*v3;
 						if (k==0 || dist<best){
 							best=dist;
@@ -139,11 +139,11 @@ __global__ void NmDistanceGradKernel1(int b,int n,const float * xyz1,int m,const
 			float y2=y1 - xyz2[(i*m+j2)*3+1];
 			float z2=y2 - xyz2[(i*m+j2)*3+2];
 			float x3 = x2 / a;
-			float y3 = (a * y2 - b * x2) / (a * c);
-			float z3 = (a * c * z2 - a * e * y2 + b * e * x2 - c * d * x2) / (a * c * f);
-			float x4 = z3 / f;
-			float y4 = (y3 - e * x4) / c;
-			float z4 = (x3 - b * y4 - d * x4) / a;
+			float y3 = (y2 - b * x3) / (c);
+			float z3 = (z2 - d * x3 - e * y3) / (f);
+			float z4 = z3 / f;
+			float y4 = (y3 - e * z4) / c;
+			float x4 = (x3 - b * y4 - d * z4) / a;
 			float g=grad_dist1[i*n+j]*2;
 			atomicAdd(&(grad_xyz1[(i*n+j)*3+0]),g*x4);
 			atomicAdd(&(grad_xyz1[(i*n+j)*3+1]),g*y4);
@@ -172,11 +172,11 @@ __global__ void NmDistanceGradKernel2(int b,int n,const float * xyz1,int m,const
 			float y2=y1 - xyz2[(i*m+j2)*3+1];
 			float z2=z1 - xyz2[(i*m+j2)*3+2];
 			float x3 = x2 / a;
-			float y3 = (a * y2 - b * x2) / (a * c);
-			float z3 = (a * c * z2 - a * e * y2 + b * e * x2 - c * d * x2) / (a * c * f);
-			float x4 = z3 / f;
-			float y4 = (y3 - e * x4) / c;
-			float z4 = (x3 - b * y4 - d * x4) / a;
+			float y3 = (y2 - b * x3) / (c);
+			float z3 = (z2 - d * x3 - e * y3) / (f);
+			float z4 = z3 / f;
+			float y4 = (y3 - e * z4) / c;
+			float x4 = (x3 - b * y4 - d * z4) / a;
 			float g=grad_dist1[i*n+j]*2;
 			atomicAdd(&(grad_xyz1[(i*n+j)*3+0]),g*x4);
 			atomicAdd(&(grad_xyz1[(i*n+j)*3+1]),g*y4);
